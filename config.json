@@ -1,5 +1,6 @@
 {
     "runs": {
+        "autoStart": false,
         "autoTakeOverWhenIdle": true,
         "runningCountDown": -1,
         "moveAfterAFK": true,

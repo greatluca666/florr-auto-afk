@@ -415,6 +415,20 @@ if __name__ == "__main__":
         sv_ttk.set_theme(theme)
         apply_theme_to_titlebar(root)
 
+        # runs.autoStart: start detecting as soon as the GUI is up, with nobody
+        # clicking "run". This exists for external launchers -- bots that drive
+        # florr.io themselves and start this program alongside -- which have no
+        # way to press that button: there is no CLI flag and no IPC to start
+        # detection, and clicking it from outside is unreliable because the
+        # SetProcessDpiAwareness/tk scaling calls above move the button with the
+        # system DPI. .get() so an older config.json without the key still loads.
+        if get_config()["runs"].get("autoStart", False):
+            toggle_segment_process()
+            # Minimize to the taskbar so it does not cover a fullscreen game.
+            # Not withdraw(): that leaves no taskbar entry, so a user who wants
+            # to stop it by hand would have to go through Task Manager.
+            root.iconify()
+
         root.mainloop()
 
         if segment_process is not None and segment_process.is_alive():

@@ -1,5 +1,8 @@
 # florr auto afk (v1.1.1) (2025-04-20 Update)
 
+> [!NOTE]
+> **Modified fork.** This is a fork of [Shiny-Ladybug/florr-auto-afk](https://github.com/Shiny-Ladybug/florr-auto-afk) at tag `v1.1.1`, modified on 2026-08-28 by adding one config option: `runs.autoStart` (default `false`). When it is `true`, `segment.py` calls `toggle_segment_process()` and `root.iconify()` before `root.mainloop()`, so detection begins without a human clicking "run" and the window minimizes itself. Nothing else is changed. The option exists so an external launcher — a bot that drives florr.io and starts this program alongside itself — can run it unattended; upstream has no CLI flag or IPC for that. Licensed GPL-3.0, same as upstream.
+
 > As m28 released his new anti afk, I‘ll put my new anti-anti afk code here.
 
 > [!CAUTION]
