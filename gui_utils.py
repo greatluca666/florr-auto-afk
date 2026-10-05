@@ -804,6 +804,13 @@ def check_eula():
 def show_share_warn(force: bool = False):
     if path.exists("./eula.txt") and not force:
         return
+    if not force and get_config()["runs"].get("autoStart", False):
+        # Unattended launch (runs.autoStart): nobody is there to answer the
+        # dialog, and a modal askquestion() here would block autoStart behind
+        # a window hidden by the fullscreen game. Default to not sharing; the
+        # user can still turn it on in Settings.
+        save_eula(False)
+        return
     shared = messagebox.askquestion('Save Datasets',
                                     'Are you sure you want to share the datasets?\nThis will not share your personal information.\nYou can also set this in Settings Page.\nCheck the shared datasets in https://github.com/Shiny-Ladybug/florr-afk')
     save_eula(shared == "yes")
