@@ -13,7 +13,7 @@
         "soundPath": "./gui/notify.mp3"
     },
     "exposure": {
-        "enable": false,
+        "enable": true,
         "moveInterval": 0.25,
         "duration": 3
     },
