@@ -330,8 +330,10 @@ def draw_version(image, width, height, special_ui):
         outline_color=(0, 0, 0),
         outline_width=2,
     )
-    text_width, text_height = ImageDraw.Draw(
-        Image.fromarray(rounded_image)).textsize("florr-auto-afk", font=ImageFont.truetype("./gui/Ubuntu-R.ttf", 50))
+    _bbox = ImageDraw.Draw(Image.fromarray(rounded_image)).textbbox(
+        (0, 0), "florr-auto-afk", font=ImageFont.truetype("./gui/Ubuntu-R.ttf", 50))
+    text_width = _bbox[2] - _bbox[0]
+    text_height = _bbox[3] - _bbox[1]
 
     if constants.VERSION_TYPE == "Release":
         version = constants.VERSION_INFO
@@ -375,7 +377,9 @@ def draw_text_pil(img, text, position, font_path, font_size,
     draw = ImageDraw.Draw(pil_img)
     font = ImageFont.truetype(font_path, font_size)
 
-    text_width, text_height = draw.textsize(text, font=font)
+    _bbox = draw.textbbox((0, 0), text, font=font)
+    text_width = _bbox[2] - _bbox[0]
+    text_height = _bbox[3] - _bbox[1]
 
     x, y = position
     if align == 'center':

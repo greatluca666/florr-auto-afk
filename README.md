@@ -1,3 +1,5 @@
+> **Fork notice.** This is a fork of [Shiny-Ladybug/florr-auto-afk](https://github.com/Shiny-Ladybug/florr-auto-afk) (GPL-3.0) at v1.3.2. Differences from upstream: `runs.autoStart` (start detecting without clicking "run"; default off), PyInstaller spec fixes and a Pillow `textbbox` fix so it builds with current dependencies (both borrowed from [luyu-go/florr-auto-afk](https://github.com/luyu-go/florr-auto-afk), also GPL-3.0), and a CI workflow that ships a plain `.zip`.
+
 # florr auto afk (v1.3.2) (2025-07-05 Update)
 
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/Shiny-Ladybug/florr-auto-afk/build-python.yml?style=for-the-badge) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Shiny-Ladybug/florr-auto-afk?style=for-the-badge) ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/Shiny-Ladybug/florr-auto-afk/total?style=for-the-badge) ![GitHub Release](https://img.shields.io/github/v/release/Shiny-Ladybug/florr-auto-afk?style=for-the-badge)

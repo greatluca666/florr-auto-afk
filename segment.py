@@ -998,7 +998,10 @@ if __name__ == "__main__":
         # SetProcessDpiAwareness/tk scaling calls above move the button with the
         # system DPI. .get() so an older config.json without the key still loads.
         if get_config()["runs"].get("autoStart", False):
-            toggle_segment_process()
+            # same window list the "run" button builds (see launch_button)
+            toggle_segment_process([{"title": w["title"],
+                                     "hwnd": w["hwnd"],
+                                     "capture_method": w["capture_method"]} for w in capture_windows])
             # Minimize to the taskbar so it does not cover a fullscreen game.
             # Not withdraw(): that leaves no taskbar entry, so a user who wants
             # to stop it by hand would have to go through Task Manager.

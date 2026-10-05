@@ -1,15 +1,28 @@
 # -*- mode: python ; coding: utf-8 -*-
 
+from PyInstaller.utils.hooks import collect_data_files, collect_submodules
+
+rich_datas = collect_data_files('rich')
+rich_hidden = collect_submodules('rich._unicode_data')
+
 a = Analysis(
     ['./segment.py'],
     pathex=[],
     binaries=[],
-    datas=[],
-    hiddenimports=['shapely', 'pyclipper', 'pyscreeze', 'pytweening', 'pymsgbox', 'psutil', 'playsound', 'win11toast', 'fastapi', 'uvicorn.lifespan.off', 'uvicorn.lifespan.on', 'uvicorn.lifespan', 'uvicorn.protocols.websockets.auto', 'uvicorn.protocols.websockets.wsproto_impl', 'uvicorn.protocols.websockets_impl', 'uvicorn.protocols.http.auto',
-                   'uvicorn.protocols.http.h11_impl', 'uvicorn.protocols.http.httptools_impl',
-                   'uvicorn.protocols.websockets', 'uvicorn.protocols.http', 'uvicorn.protocols',
-                   'uvicorn.loops.auto', 'uvicorn.loops.asyncio', 'uvicorn.loops.uvloop', 'uvicorn.loops',
-                   'uvicorn.logging', 'pyperclip'],
+    datas=rich_datas,
+    hiddenimports=[
+        'scipy._cyutility',
+        *rich_hidden,
+        'shapely', 'pyclipper', 'pyscreeze', 'pytweening', 'pymsgbox', 'psutil',
+        'playsound', 'win11toast', 'fastapi',
+        'uvicorn.lifespan.off', 'uvicorn.lifespan.on', 'uvicorn.lifespan',
+        'uvicorn.protocols.websockets.auto', 'uvicorn.protocols.websockets.wsproto_impl',
+        'uvicorn.protocols.websockets_impl', 'uvicorn.protocols.http.auto',
+        'uvicorn.protocols.http.h11_impl', 'uvicorn.protocols.http.httptools_impl',
+        'uvicorn.protocols.websockets', 'uvicorn.protocols.http', 'uvicorn.protocols',
+        'uvicorn.loops.auto', 'uvicorn.loops.asyncio', 'uvicorn.loops.uvloop', 'uvicorn.loops',
+        'uvicorn.logging', 'pyperclip',
+    ],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
