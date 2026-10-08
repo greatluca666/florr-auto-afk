@@ -55,6 +55,23 @@ jobs:
         run: |
           python -m PyInstaller segment.spec
 
+      - name: Verify torchvision native ops were bundled
+        shell: powershell
+        run: |
+          # torchvision loads its C++ ops with torch.ops.load_library(<path>), never
+          # via import, so PyInstaller only bundles them through a hook that names the
+          # file. When a torchvision release renames the .pyd (0.29: _C.pyd ->
+          # _C_stable.pyd) the hook silently misses it, the build still passes, and the
+          # exe dies at the first YOLO call with "operator torchvision::nms does not
+          # exist". Fail the build here instead of shipping that.
+          $native = Get-ChildItem -Path ./dist/segment/_internal -Recurse -Filter "_C*.pyd" |
+            Where-Object { $_.FullName -like "*torchvision*" }
+          if (-not $native) {
+            Write-Error "torchvision's native _C*.pyd is missing from the bundle"
+            exit 1
+          }
+          Write-Host "bundled: $($native.FullName -join ', ')"
+
       - name: Assemble and zip
         shell: powershell
         run: |

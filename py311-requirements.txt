@@ -1,6 +1,10 @@
-torch
-torchaudio
-torchvision
+# Pinned to the combo the v1.1.1 build shipped with. torchvision 0.29 renamed its
+# native libs (_C.pyd -> _C_stable.pyd, image.pyd -> image_stable.pyd), which the
+# PyInstaller torchvision hook does not know about: the build "succeeds" but the
+# exe dies at the first YOLO call with "operator torchvision::nms does not exist".
+torch==2.13.0
+torchaudio==2.11.0
+torchvision==0.28.0
 ultralytics
 lap>=0.5.12
 scipy==1.15.3
